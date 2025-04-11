@@ -1,0 +1,21 @@
+extends layout
+
+
+block content
+
+    h1 #{title} ID: #{bookinstance.book.id}
+
+    h4(style='margin-top: 30px;') Book:
+        a(href=bookinstance.book.url)  #{bookinstance.book.title}
+
+    if bookinstance.status !== 'Loaned'
+        p Do you really want to delete this BookInstance?
+
+        form(method='POST')
+           div.form-group
+               input#bookinstanceid.form-control(type='hidden' name='bookinstanceid' value=bookinstance._id)
+
+               button.btn.btn-primary(type='submit') Delete
+    else
+        p Cannot delete BookInstance because its:
+            span.text-warning  #{bookinstance.status}

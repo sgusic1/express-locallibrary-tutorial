@@ -1,0 +1,30 @@
+extends layout
+
+block content
+
+    h1 #{title} : #{book.title}
+
+    p Author:
+      a(href=book.author.url)  #{book.author.name}
+
+    if allbookinstances.length > 0
+       p #[strong Delete the following book-instances before attempting to delete the book.]
+       div(style='margin-left: 20px; margin-top: 30px;')
+          h4 Book-Instances
+          ul
+            each bookinstance in allbookinstances
+                li
+                  a(href=bookinstance.url) #{bookinstance.book.title}
+                  p Status:
+                      if bookinstance.status === 'Available'
+                         span.text-success  #{bookinstance.status}
+                      else if bookinstance.status === 'Maintenance'
+                         span.text-danger  #{bookinstance.status}
+                      else
+                         span.text-warning  #{bookinstance.status}
+    else
+       p Do you really want to delete this Book?
+
+       form(method='POST')
+
+          button.btn.btn-primary Delete
