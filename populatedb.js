@@ -4,6 +4,8 @@ console.log(
     'This script populates some test books, authors, genres and bookinstances to your database. Specified database as argument - e.g.: node populatedb "mongodb+srv://cooluser:coolpassword@cluster0.cojoign.mongodb.net/local_library?retryWrites=true&w=majority&appName=Cluster0"'
 );
 
+
+
 // Get arguments passed on command line
 const userArgs = process.argv.slice(2);
 
@@ -20,7 +22,8 @@ const bookinstances = [];
 const mongoose = require("mongoose");
 mongoose.set("strictQuery", false);
 
-const mongoDB = userArgs[0];
+require("dotenv").config()
+const mongoDB = process.argv[2] || process.env.MONGODB_URI;
 
 main().catch((err) => console.log(err));
 
