@@ -1,0 +1,42 @@
+services:
+  app:
+    image: sgusic29/express-locallibrary:latest
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    environment:
+      MONGODB_URI: ${MONGODB_URI:-mongodb://mongo:27017/library}
+    ports:
+      - "3000:3000"
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: "no"
+
+
+  mongo:
+    image: mongo:6.0
+    restart: unless-stopped
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  populate:
+    image: sgusic29/express-locallibrary:latest
+    env_file:
+      - .env
+    command: ["node", "populatedb.js"]
+    depends_on:
+      mongo:
+        condition: service_healthy
+    restart: "no"
+    profiles: ["seed"]
+
+volumes:
+  mongo-data:
