@@ -14,7 +14,25 @@ You can browse and manage:
 - **Templating:** Pug
 
 ## Getting started
-
+### 1) Install dependencies
 ```bash
-# 1) Install dependencies
 npm install
+```
+### 2) Create a '.env' file
+In the project root, create a file named `.env` and set your own MongoDB connection string:
+```env
+MONGODB_URI=<your-mongodb-connection-string>
+```
+Example MONGODB_URI string for a local database:
+```env
+MONGODB_URI=mongodb://localhost:27017/library
+```
+### 3) Run the application
+```bash
+npm start
+```
+With debug output run:
+```bash
+npm run serverstart
+```
+#### then open http://localhost:3000
