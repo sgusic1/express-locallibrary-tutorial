@@ -72,5 +72,33 @@ If MONGODB_URI is not set, the app uses the built-in mongo service at:
 mongodb://mongo:27017/library
 ```
 ## Usage
+### Start App + MongoDB
+```bash
+docker compose up -d
+```
+### Start App + MongoDB
+```bash
+docker compose down
+```
+### Database Persistence
+MongoDB stores its data in the named volume mongo-data, so data survives container restarts and up/down cycles:
+```bash
+volumes:
+  - mongo-data:/data/db
+```
+to remove the data:
+```bash
+docker compose down -v
+```
+## Populate Database Service
+The populate service runs populatedb.js to insert sample data.
+It’s meant to be run manually, not automatically, so you only seed when you want to.
 
+```bash
+# Make sure mongo is running
+docker compose up -d mongo
+
+# Run populate once (container removed after it exits)
+docker compose run --rm populate
+```
 ---
