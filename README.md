@@ -59,4 +59,18 @@ It also includes a **populate** service for seeding the database with sample dat
 - **`populate`** – One-off container to run `node populatedb.js` and seed the database.
   - Waits until `mongo` is healthy before running.
   - Does **not** run automatically on `docker compose up` (it’s opt-in).
+
+
+## Environment Variables
+The app reads `MONGODB_URI` from a `.env` file in the project root to know which MongoDB instance to use.
+### Example: connect to an external MongoDB instance
+```env
+MONGODB_URI=mongodb://user:pass@mongo-host:27017/library?authSource=admin
+```
+If MONGODB_URI is not set, the app uses the built-in mongo service at:
+```bash
+mongodb://mongo:27017/library
+```
+## Usage
+
 ---
