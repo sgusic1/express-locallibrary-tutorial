@@ -48,5 +48,15 @@ It also includes a **populate** service for seeding the database with sample dat
 - Optional: `.env` file for custom database connection
 
 ## How It Works
-
+### Services
+- **`app`** – Builds from the included Dockerfile (or uses the prebuilt image `sgusic29/express-locallibrary:latest`) and serves the library’s web interface and API.
+  - Builds from `Dockerfile` if the image does not exist locally.
+  - Reads database connection from `MONGODB_URI` environment variable.
+  - Falls back to the internal `mongo` service if `MONGODB_URI` is not provided.
+- **`mongo`** – MongoDB 6.0 database
+  - Stores data in a persistent named volume (`mongo-data`).
+  - Includes a healthcheck so `app` waits until MongoDB is ready.
+- **`populate`** – One-off container to run `node populatedb.js` and seed the database.
+  - Waits until `mongo` is healthy before running.
+  - Does **not** run automatically on `docker compose up` (it’s opt-in).
 ---
