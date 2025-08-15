@@ -11,4 +11,10 @@ You can browse and manage:
 ## Technology stack
 - **Backend:** Node.js + Express
 - **Database:** MongoDB (via Mongoose ODM)
-- **Templating:** Pug 
+- **Templating:** Pug
+
+## Getting started
+
+```bash
+# 1) Install dependencies
+npm install
