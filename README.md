@@ -36,3 +36,17 @@ With debug output run:
 npm run serverstart
 ```
 #### then open http://localhost:3000
+
+---
+## 🐳 Docker Compose Setup
+This repository contains a Docker Compose setup for running the **Express Local Library** app together with a MongoDB database.
+It also includes a **populate** service for seeding the database with sample data.
+
+
+## Prerequisites
+- [Docker](https://docs.docker.com/get-docker/) & [Docker Compose v2+](https://docs.docker.com/compose/install/)
+- Optional: `.env` file for custom database connection
+
+## How It Works
+
+---
