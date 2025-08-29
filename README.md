@@ -8,7 +8,7 @@ You can browse and manage:
 - Detailed pages for each item.
 - CRUD funcitonality for all entity types.
 
-## Technology stack
+## Tech stack
 - **Backend:** Node.js + Express
 - **Database:** MongoDB (via Mongoose ODM)
 - **Templating:** Pug
